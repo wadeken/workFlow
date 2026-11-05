@@ -1,0 +1,43 @@
+# {{PROJECT_NAME}}
+
+{{WHAT_IT_IS}}
+<!-- 2-3 sentences: what it does, who uses it, what stage it is at. No marketing language. -->
+
+## 技術棧
+
+{{STACK}}
+<!-- language + version, framework, package manager, test runner, linter/formatter. One line each. -->
+
+## 常用指令
+
+```bash
+{{COMMANDS}}
+```
+<!-- install / dev / test / lint / build. Each line must run as-is in this stack. Add a short trailing comment per line. -->
+
+## 目錄結構
+
+```
+{{TREE}}
+```
+<!-- current or planned. One trailing comment per entry. Mark planned entries with (planned). -->
+
+## 工作方式
+
+{{WORKFLOW}}
+<!-- branching, commit message format, how big a change is before it gets split, when to open a PR. -->
+
+## 測試要求
+
+{{TESTING}}
+<!-- which changes need tests, what "green" means, what to do when a test fails. -->
+
+## 不要做的事
+
+{{DONTS}}
+<!-- the user's own answers, one bullet each, with the reason if they gave one. Never pad with generic advice. -->
+
+## 待決事項
+
+{{OPEN_QUESTIONS}}
+<!-- anything the user said is undecided, plus assumptions you made because you could not ask. One bullet each. "無" if empty. -->
