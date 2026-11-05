@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: empty-folder-nextjs-saas
+expected_outcome: |
+  The user supplied every core answer up front and asked not to be interviewed, so the skill
+  should run detect, skip the interview, load the TypeScript stack reference, and write
+  ./CLAUDE.md in Traditional Chinese with all eight sections. The three restrictions the user
+  named appear verbatim in 不要做的事, the commands use pnpm, and no placeholder text remains.

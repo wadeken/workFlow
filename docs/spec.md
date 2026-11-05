@@ -1,6 +1,6 @@
 # workFlow 規格 v0.1
 
-狀態：草稿
+狀態：v0.1 實作中
 最後更新：2026-11-05
 
 ## 1. 一句話說明
@@ -37,7 +37,7 @@ v0.1 先做第一種，第二、三種列為後續版本。
 - 產出：一份 CLAUDE.md，寫入目前資料夾。若已存在則先備份再詢問是否覆蓋。
 - 產出的語言由使用者在訪談時選擇，預設繁體中文。
 - plugin 包裝：`.claude-plugin/plugin.json` 與 `marketplace.json`，可用 `/plugin marketplace add` 安裝。
-- 三個 eval 案例。
+- 四個 eval 案例。
 
 ### v0.1 不做
 
@@ -52,6 +52,7 @@ v0.1 先做第一種，第二、三種列為後續版本。
 | 項目 | 決定 | 理由 |
 |---|---|---|
 | 實作形式 | Claude Code skill，純 Markdown | 使用者就是 Claude Code，skill 是原生格式，不需額外 runtime |
+| 安裝名稱 | plugin `workflow`，marketplace `wadeken-workflow`，skill 呼叫為 `/workflow:bootstrap-claude-md` | 與 repo 名對齊，日後可在同一 marketplace 加其他 plugin |
 | 發布方式 | plugin marketplace | 一行指令安裝、自動更新，和 Pocock、Osmani 的做法一致 |
 | 確定性邏輯 | bash script | 偵測檔案存在這類事交給 script，省 token 也不會判斷錯 |
 | 指令語言 | 英文 | 給模型讀的指令英文最穩定；面向人的文件用繁體中文 |
@@ -120,20 +121,25 @@ v0.1 完成的定義：
 - [ ] 產出的 CLAUDE.md 八個區塊齊全，沒有「TODO」或「請填入」之類的佔位文字。
 - [ ] 常用指令區塊的每一行都能在該技術棧下實際執行。
 - [ ] 資料夾已有 CLAUDE.md 時會先備份再詢問。
-- [ ] 三個 eval 案例在 `claude plugin eval` 下通過。
+- [ ] 四個 eval 案例在 `claude plugin eval` 下通過。
 - [ ] `/plugin marketplace add wadeken/workFlow` 可以成功安裝。
 
 ## 10. Eval 案例
 
+eval 在無人回答的環境下執行，所以需要完整產出的案例都在 prompt 裡講明「不用問我」。
+訪談行為由第四個案例單獨驗證。
+
 | 案例名稱 | 情境 | 主要檢查點 |
 |---|---|---|
-| `empty-folder-nextjs-saas` | 空資料夾，使用者說要做一個 Next.js 的 SaaS 後台 | 有訪談、指令可執行、不要做的事有寫入 |
-| `python-cli-with-existing-git` | 已 git init 但沒有程式碼，使用者說要做 Python CLI | 不重複問是否用 git、選對 Python 參考檔 |
-| `undecided-stack` | 使用者只說「想做工作流自動化，還沒決定語言」 | skill 要給建議並說明理由，待決事項區塊有內容 |
+| `empty-folder-nextjs-saas` | 空資料夾，使用者一次講完所有資訊並要求直接寫 | 不多問、跑過 detect、三條禁令逐字寫入、全用 pnpm、無佔位文字 |
+| `python-cli-with-existing-git` | 已 git init 與 .gitignore，沒有程式碼，Python CLI | 不重跑 git init、選 Python 參考檔、uv 指令、不捏造禁令 |
+| `undecided-stack` | 「想做工作流自動化，還沒決定語言，不用問我」 | 只推薦一個技術棧並說理由、待決事項記錄假設、不卡住 |
+| `asks-before-writing-when-vague` | 空資料夾，只說「幫我開一個新專案」 | 不寫檔、跑過 detect、只問一題、用繁體中文問 |
 
 ## 11. 開放問題
 
-- 訪談要一次問完六題，還是一題一題問？一次問完省輪次，一題一題問品質較高。v0.1 先採一題一題，eval 後再決定。
+- 訪談要一次問完六題，還是一題一題問？v0.1 採一題一題，理由寫在 `references/interview.md`。eval 後再決定是否改。
+- 使用者說「不用問我」或在無法回答的環境下執行時，skill 會自行假設並全部列進待決事項。這個行為是否該有開關？
 - `references/stacks/` 要不要包含 Rust 和 Java？先看前三個穩定後再加。
 - 產出後要不要主動建議裝 Pocock skills？目前傾向建議但不自動安裝，由使用者決定。
 - 是否要支援產出 `.claude/settings.json` 的 permissions 建議？可能是 v0.2 的範圍。
@@ -146,9 +152,11 @@ v0.1 完成的定義：
 | v0.2 | 既有專案補 CLAUDE.md、settings.json 建議、更多技術棧 |
 | v0.3 | 過時 CLAUDE.md 的比對更新、monorepo |
 
-## 13. 下一步
+## 13. 進度
 
-1. 建立 `.claude-plugin/plugin.json` 與 `marketplace.json`。
-2. 寫 `skills/bootstrap-claude-md/SKILL.md` 第一版。
-3. 寫 `references/interview.md` 與 `assets/CLAUDE.md.template`。
-4. 寫三個 eval 的 `prompt.md`，跑第一輪，依結果修 skill。
+- [x] `.claude-plugin/plugin.json` 與 `marketplace.json`。plugin 名稱 `workflow`，marketplace 名稱 `wadeken-workflow`。
+- [x] `SKILL.md` 第一版，含五步流程、三個範例、反模式清單。
+- [x] `references/interview.md`、`references/claude-md-anatomy.md`、三個 `stacks/` 檔、`assets/CLAUDE.md.template`、`scripts/detect.sh`。
+- [x] 四個 eval 案例的 prompt、case.yaml、graders。
+- [ ] 第一輪 eval 結果與修正（見 `docs/eval-log.md`）。
+- [ ] 用 `/plugin marketplace add wadeken/workFlow` 實際安裝一次確認可用。

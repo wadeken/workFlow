@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: asks-before-writing-when-vague
+expected_outcome: |
+  The folder is empty and the user gave no information at all. The skill must not write a
+  CLAUDE.md yet. It should run detect, then ask exactly one question (the first core question,
+  what the project is and who it is for), in Traditional Chinese to match the user, and end its
+  turn waiting for the answer.

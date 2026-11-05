@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: undecided-stack
+expected_outcome: |
+  The user has not chosen a language and asked not to be interviewed. The skill should run
+  detect, recommend one stack with a one- or two-sentence reason grounded in the task and the
+  installed toolchains, load that stack's reference, write a complete CLAUDE.md for it, and
+  record under 待決事項 that the stack was chosen by recommendation and is unconfirmed, along
+  with every other assumption (test runner, commit style, file language). It should not stall
+  or end with a question.

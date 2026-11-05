@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: python-cli-with-existing-git
+expected_outcome: |
+  The folder already has git initialised and a .gitignore but no code. The skill should notice
+  this from detect output and not ask about or re-run git init. It loads the Python stack
+  reference, writes a Traditional Chinese CLAUDE.md using uv commands and the src/ layout marked
+  as planned, states that there are no restrictions rather than inventing some, and lists any
+  assumptions under 待決事項.
+context:
+  scaffold_script: place-files.sh
