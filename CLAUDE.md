@@ -29,6 +29,8 @@ workFlow/
         │   └── stacks/                 # 各技術棧的慣例，一個檔案一個棧
         ├── assets/
         │   └── CLAUDE.md.template      # 產出用的範本
+        ├── scripts/
+        │   └── detect.sh               # 偵測資料夾狀態，只印事實不做判斷
         └── evals/                      # 測試案例，一個資料夾一個案例
 ```
 
@@ -54,7 +56,8 @@ workFlow/
 
 ## 測試
 
-- 每個測試案例是 `skills/bootstrap-claude-md/evals/<case-name>/` 底下的一個資料夾，含 `prompt.md` 與 `case.yaml`。
+- 每個測試案例是 `skills/bootstrap-claude-md/evals/<case-name>/` 底下的一個資料夾，含 `prompt.md`、`case.yaml`
+  與 `graders/`（一個檔案一條可驗證的敘述）。需要預先放檔案或 git init 的案例加 `place-files.sh`。
   案例名稱用小寫加連字號，說明它在測什麼，例如 `nextjs-saas-from-scratch`。
 - 跑測試：`claude plugin eval` 會讀取上述格式。手動測試則開一個空資料夾，用 `claude --plugin-dir` 載入本 repo，
   輸入 prompt.md 的內容，檢查產出的 CLAUDE.md。

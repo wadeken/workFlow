@@ -1,0 +1,12 @@
+{
+  "name": "workflow",
+  "version": "0.1.0",
+  "description": "Bootstrap a project-specific CLAUDE.md for a new project: inspect the folder, interview the user, then write a tailored CLAUDE.md and suggest the first steps.",
+  "author": {
+    "name": "wadeken"
+  },
+  "homepage": "https://github.com/wadeken/workFlow",
+  "repository": "https://github.com/wadeken/workFlow",
+  "license": "MIT",
+  "keywords": ["claude-md", "bootstrap", "new-project", "scaffold", "workflow"]
+}

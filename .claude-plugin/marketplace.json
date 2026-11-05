@@ -1,0 +1,19 @@
+{
+  "name": "wadeken-workflow",
+  "owner": {
+    "name": "wadeken"
+  },
+  "metadata": {
+    "description": "wadeken 的 Claude Code plugin 集合。目前只有 workflow：開新專案時產出客製 CLAUDE.md。",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "workflow",
+      "source": "./",
+      "description": "Bootstrap a project-specific CLAUDE.md for a new project by inspecting the folder and interviewing the user.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}
