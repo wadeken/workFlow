@@ -158,5 +158,5 @@ eval 在無人回答的環境下執行，所以需要完整產出的案例都在
 - [x] `SKILL.md` 第一版，含五步流程、三個範例、反模式清單。
 - [x] `references/interview.md`、`references/claude-md-anatomy.md`、三個 `stacks/` 檔、`assets/CLAUDE.md.template`、`scripts/detect.sh`。
 - [x] 四個 eval 案例的 prompt、case.yaml、graders。
-- [ ] 第一輪 eval 結果與修正（見 `docs/eval-log.md`）。
+- [x] 第一輪 eval：四案例全過，無修改（見 `docs/eval-log.md`）。
 - [ ] 用 `/plugin marketplace add wadeken/workFlow` 實際安裝一次確認可用。
